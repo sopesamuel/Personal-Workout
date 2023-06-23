@@ -4,15 +4,18 @@ import { RootStackParamList } from "../navigation/Index";
 import data from '../Data.json';
 import { Workout } from "../types/Data";
 import WorkOuutItem from "../components/WorkOutItem";
+import { Poppins } from "../components/FontsChildren/Poppins";
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>
 
 export default function HomeScreen({navigation}: Props){
 
+ 
     return(
         <View style={styles.container}>
             {/* <Text>{ JSON.stringify(data) }</Text> */}
             <Text style={styles.header}>New Workout</Text>
+            <Poppins>Testing Children Fonts</Poppins>
         <FlatList 
             data={data as Workout[]}
             renderItem={WorkOuutItem}
@@ -30,6 +33,7 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 20,
         fontWeight: "bold",
-        marginBottom: 20
+        marginBottom: 20,
+        fontFamily: "Poppins-Bold"
     }
 })
