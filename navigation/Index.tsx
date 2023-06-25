@@ -3,13 +3,15 @@ import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "../screens/HomeScreen";
 import PlannerScreen from "../screens/PlannerScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Text } from "react-native";
 import { FontAwesome } from '@expo/vector-icons';
+import WorkOutDetailsScreen from "../screens/WorkOutDetailScreen";
+
 
 export type RootStackParamList = {
     Root: undefined;
     Welcome: undefined;
     Home: undefined;
+    WorkOut: undefined;
     Planner: undefined;
 };
 
@@ -26,11 +28,17 @@ export default function Navigation(){
 function RootNavigator(){
     return(
         <Stack.Navigator>
+            <Stack.Screen 
+            name="Root"
+            component={BottomTabNavigator}
+            options={{ headerShown: false}}
+            />
+
         <Stack.Screen 
-        name="Root"
-        component={BottomTabNavigator}
-        options={{ headerShown: false}}
-        />
+            name="WorkOut"
+            component={WorkOutDetailsScreen}
+            />
+
       </Stack.Navigator>
     )
 }
@@ -48,6 +56,7 @@ function BottomTabNavigator(){
                         <FontAwesome name="home" size={size} color={color}/>                
                     }}
             />
+
              <BottomTab.Screen
                name="Planner"
                component={PlannerScreen}

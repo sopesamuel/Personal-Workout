@@ -1,5 +1,4 @@
 import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
 import useCachedResource from './hooks/useCachedResources';
 import Navigation from './navigation/Index';
 

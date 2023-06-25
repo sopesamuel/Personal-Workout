@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, FlatList } from "react-native";
+import { Text, View, StyleSheet, FlatList, Pressable, Alert } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/Index";
 import data from '../Data.json';
@@ -18,7 +18,13 @@ export default function HomeScreen({navigation}: Props){
             <Poppins>Testing Children Fonts</Poppins>
         <FlatList 
             data={data as Workout[]}
-            renderItem={WorkOuutItem}
+            renderItem={({item}) => {
+                return(
+                    <Pressable onPress={() => navigation.navigate("WorkOut", {slug: item.slug, name : item.name } as any)}>
+                        <WorkOuutItem item={item} />
+                    </Pressable>
+                )
+            }}
             keyExtractor={(item)  => item.slug}
         />
         </View>

@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Workout } from "../types/Data";
+import { SecondsMin, formatSec } from "../utils/SecondsMin";
 
 
 
@@ -7,7 +8,7 @@ export default function WorkOuutItem({item}: {item: Workout}) {
     return(
     <View style={style.container}>
         <Text style={style.name}>{item.name}</Text>
-        <Text style={style.duration}>Duration - {item.duration}</Text>
+        <Text style={style.duration}>Duration - {formatSec(item.duration)}</Text>
         <Text style={style.difficulty}>Difficulty - {item.difficulty}</Text>
     </View>
     )

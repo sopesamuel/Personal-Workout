@@ -1,29 +1,39 @@
-import { useState, useEffect } from "react"
-import *  as Font from "expo-font";
+import { useEffect, useState } from "react";
+import * as Font from 'expo-font';
+import { getData, storeData, containData } from "../storage/Index";
+import data from "../Data.json"
 
 
+export default function useCachedResources(){
+    const [isLoaded, SetisLoaded] = useState(false);
 
-export default function useCachedResource(){
+    useEffect(() =>
+    {
+        async function loadedResources(){
+                try {
+                   const availKey = await containData("workout-data");
+                   if(!availKey){
+                    console.log("Available")
+                    await storeData("workout-data", data)
+                   }
 
-     const [isLoaded, setIsloaded] = useState(false)
-
-     useEffect(() => {
-        async function loadedResourcesAsync() {
-            // setTimeout(() => {setIsloaded(true)}, 1000)
-            try {
-                await Font.loadAsync({
-                    "Poppins" : require("../assets/fonts/Poppins-Medium.ttf"),
-                    "Poppins-Bold" : require("../assets/fonts/Poppins-Bold.ttf"),
-                    "Poppins-SemiBold" : require("../assets/fonts/Poppins-SemiBold.ttf")
-                })
-            } catch(e){
-                console.warn(e)
-            } finally{
-                setIsloaded(true)
-            }
+                   await Font.loadAsync({
+                        "Poppins" : require('../assets/fonts/Poppins-Medium.ttf'),
+                        "Poppins-Bold": require('../assets/fonts/Poppins-Bold.ttf'),
+                        "Poppins-SemiBold": require('../assets/fonts/Poppins-SemiBold.ttf')
+                    })
+                } catch (e) {
+                    console.warn(e)
+                } finally{
+                   const list = await getData("workout");
+                   console.log(list)
+                    SetisLoaded(true)
+                } 
         }
-        loadedResourcesAsync();
-     }, [])
-     
-     return isLoaded;
+        loadedResources()
+
+    }, [])
+
+    return isLoaded;
+
 }
