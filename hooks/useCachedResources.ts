@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import * as Font from 'expo-font';
-import { getData, storeData, containData } from "../storage/Index";
-import data from "../Data.json"
-
+import { availableData, getAvailableData, removedData } from "../storage/Workout";
 
 export default function useCachedResources(){
     const [isLoaded, SetisLoaded] = useState(false);
@@ -11,12 +9,8 @@ export default function useCachedResources(){
     {
         async function loadedResources(){
                 try {
-                   const availKey = await containData("workout-data");
-                   if(!availKey){
-                    console.log("Available")
-                    await storeData("workout-data", data)
-                   }
-
+                   await removedData();
+                   await availableData();
                    await Font.loadAsync({
                         "Poppins" : require('../assets/fonts/Poppins-Medium.ttf'),
                         "Poppins-Bold": require('../assets/fonts/Poppins-Bold.ttf'),
@@ -25,8 +19,8 @@ export default function useCachedResources(){
                 } catch (e) {
                     console.warn(e)
                 } finally{
-                   const list = await getData("workout");
-                   console.log(list)
+                    const work = await getAvailableData();
+                    console.log(work)
                     SetisLoaded(true)
                 } 
         }

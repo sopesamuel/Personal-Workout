@@ -60,10 +60,12 @@ function BottomTabNavigator(){
              <BottomTab.Screen
                name="Planner"
                component={PlannerScreen}
+               
                options={{
                 tabBarIcon: ({color, size}) => 
                     <FontAwesome name="paper-plane" size={20} color={color} />
                     }}
+                    
             />
         </BottomTab.Navigator>
     )

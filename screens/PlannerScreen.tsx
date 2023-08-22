@@ -6,7 +6,6 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Planner'>;
 
 export default function PlannerScreen({navigation}: Props){
 
-
     return(
         <View>
             <Text>I am PlannerScreen</Text>
